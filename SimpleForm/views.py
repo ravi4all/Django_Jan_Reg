@@ -5,4 +5,12 @@ def index(req):
     return render(req, 'index.html')
 
 def login(req):
-    return render(req, 'login.html')
+    username = ""
+
+    if 'username' in req.POST:
+        username = req.POST['username']
+
+    else:
+        username = ""
+
+    return render(req, 'login.html', {"username" : username})
