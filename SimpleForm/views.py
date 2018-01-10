@@ -7,10 +7,18 @@ def index(req):
 def login(req):
     username = ""
 
+    errors = []
+
     if 'username' in req.POST:
         username = req.POST['username']
 
-    else:
-        username = ""
+        if not username:
+            errors.append("Please fill this field")
+        elif len(username) < 10:
+            errors.append("Should be greater than 10")
 
-    return render(req, 'login.html', {"username" : username})
+        else:
+            return render(req, 'login.html', {'username' : username})
+
+
+        return render(req, 'index.html', {"errors" : errors})
