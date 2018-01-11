@@ -4,13 +4,22 @@
 <h1>Products Page</h1>
 
 <div id="products">
-    <ul>
+    <h4>Sort By : </h4>
+    <a href="#">ID</a> |
+    <a href="#">Name</a> |
+    <a href="{% url 'sortByPrice' %}">Price</a> |
+    <ul class="list-group">
         {% for data in products %}
-        <li>
-            <span>{{data.id}}</span>
-            <span>{{data.name}}</span>
-            <span>{{data.price}}</span>
-            <img src={{data.url}} height="150" width="100" alt="image">
+        <li class="list-group-item list-group-item-success">
+            <div class="image">
+                <img src={{data.url}} height="150" width="100" alt="image">
+            </div>
+            <div class="description">
+                <span>{{data.id}}</span><br>
+                <span>{{data.name}}</span><br>
+                <h3><span>{{data.price}}</span></h3>
+            </div>
+
         </li>
         {% endfor %}
     </ul>
