@@ -1,0 +1,22 @@
+#header ul li {
+    display: inline-block;
+    margin: 0px 20px;
+}
+#header ul li a {
+    color: #fff;
+}
+
+#products ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#products {
+    text-align: center;
+}
+#products h4 {
+    display: inline-block;
+}
+#products ul li{
+    width: 30%;
+    margin: 0px 15px 20px;
+}
