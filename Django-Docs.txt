@@ -1,0 +1,135 @@
+***** Making Models ( database ) *****
+1. Open terminal and type -> python manage.py migrate
+    => It will sync the database code with django
+2. Inside your app open models.py
+3. Creating Models or we can say that tables inside models.py
+----------------------------------------------------------------------------------------------------
+class table_name(models.Model):
+    column_name = models.CharField(max_length=250)
+    column_name = models.CharField(max_length=500)
+class table_name(models.Model):
+    column_name = models.ForeignKey(pk_table_name, on_delete=models.CASCADE)
+----------------------------------------------------------------------------------------------------
+4. To migrate the table type on terminal --> python manage.py makemigrations app_name
+ output :-   app_name\migrations\0001_initial.py:
+    	- Create model table_name
+    	- Create model table_name
+
+5. To view your table type on terminal --> python manage.py sqlmigrate app_name 0001
+
+6. Inserting values
+i. To start database on shell type on cmd -> python manage.py shell
+Now import the tables from app
+>>> from app_name.models import table_name, table_name
+>>> a = table_name(column_name="...",  column_name = "..."....)
+>>> a.save()
+>>> a.column_name
+
+Another way to insert
+>>> b = table_name()
+>>> b.column_name = "..."
+>>> b.column_name = "..."
+>>> b.save()
+
+Updating column
+>>> b.column_name = "newValue"
+
+Where Command
+>>> table_name.objects.filter(column_name__startswith='...')
+
+
+********* Admin ********
+1. Open terminal
+2. type -> python manage.py createsuperuser
+
+
+Polls App
+In [1]: from polls.models import Questions, Choice
+
+In [2]: Questions.objects.all()
+Out[2]: <QuerySet []>
+
+In [3]: from django.utils import timezone
+
+In [4]: q = Questions(question_text = "What's new?", pub_date = timezone.now())
+
+In [5]: q
+Out[5]: <Questions: Questions object (None)>
+
+In [6]: type(q)
+Out[6]: polls.models.Questions
+
+In [7]: q.check()
+Out[7]: []
+
+In [8]: q.save()
+
+In [9]: q
+Out[9]: <Questions: Questions object (1)>
+
+In [10]: q.check()
+Out[10]: []
+
+In [11]: q.id
+Out[11]: 1
+
+In [12]: q.question_text
+Out[12]: "What's new?"
+
+In [13]: q.pub_date
+Out[13]: datetime.datetime(2018, 1, 14, 17, 33, 13, 595436, tzinfo=<UTC>)
+
+In [14]: q.question_text = "What's up?"
+
+In [15]: q.save()
+
+In [16]: Questions.objects.all()
+Out[16]: <QuerySet [<Questions: Questions object (1)>]>
+
+In [17]: exit
+
+-----------------------------------------------------
+
+In [1]: from polls.models import Questions, Choice
+
+In [2]: Questions.objects.all()
+Out[2]: <QuerySet [<Questions: What's up?>]>
+
+In [3]: Questions.objects.get(pk=1)
+Out[3]: <Questions: What's up?>
+
+In [4]: q = Questions.objects.get(pk=1)
+
+In [5]: q.choice_set.all()
+Out[5]: <QuerySet []>
+
+In [6]: q.choice_set.create(choice_text = "Not much", votes = 0)
+Out[6]: <Choice: Not much>
+
+In [7]: q.choice_set.create(choice_text = "Just Relaxing", votes = 0)
+Out[7]: <Choice: Just Relaxing>
+
+In [8]: q.choice_set.create(choice_text = "Nothing man", votes = 0)
+Out[8]: <Choice: Nothing man>
+
+In [9]: c = q.choice_set.create(choice_text = "Nothing man", votes = 0)
+
+In [10]: c.question
+Out[10]: <Questions: What's up?>
+
+In [11]: q.choice_set.all()
+Out[11]: <QuerySet [<Choice: Not much>, <Choice: Just Relaxing>, <Choice: Nothing man>, <Choice: Nothing ma
+n>]>
+
+In [12]: c = q.choice_set.filter(choice_text__startswith = 'Nothing Man')
+
+In [13]: c.delete()
+Out[13]: (2, {'polls.Choice': 2})
+
+In [14]: c
+Out[14]: <QuerySet []>
+
+In [15]: q.choice_set.all()
+Out[15]: <QuerySet [<Choice: Not much>, <Choice: Just Relaxing>]>
+
+In [16]: exit
