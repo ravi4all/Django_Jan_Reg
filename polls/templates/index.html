@@ -1,0 +1,18 @@
+<h1>Welcome to Poll App</h1>
+{% if questions %}
+<ul>
+    {% for ques in questions %}
+    <li>
+        <!--<a href="/polls/{{ques.id}}">-->
+            <!--{{ques.question_text}}-->
+        <!--</a>-->
+        <a href="{% url 'polls:detail' ques.id %}">
+            {{ques.question_text}}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% else %}
+<h3>No Questions found</h3>
+{% endif %}
