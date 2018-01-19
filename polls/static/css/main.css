@@ -1,0 +1,12 @@
+h1,h2,h3 {
+    margin-bottom: 20px;
+}
+#votes_form ul {
+    margin-bottom: 20px;
+}
+#result_list ul {
+    margin-bottom: 20px;
+}
+.errorMessage {
+    color: red;
+}

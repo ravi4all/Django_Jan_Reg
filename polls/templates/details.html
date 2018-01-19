@@ -1,3 +1,7 @@
+{% extends 'header.html' %}
+
+{% block content %}
+
 <h2>{{question}}</h2>
 
 <!--<ul>-->
@@ -9,24 +13,26 @@
 <!--</ul>-->
 
 {% if errorMessage%}
-<p>
+<p class="errorMessage">
     <strong>
         {{errorMessage}}
     </strong>
 </p>
 {% endif %}
-
+<div id="votes_form">
 <form action="{% url 'polls:vote' question.id %}" method="post">
     {% csrf_token %}
-    <ul>
+    <ul class="list-group">
         {% for choice in question.choice_set.all %}
-        <li>
+        <li class="list-group-item">
             <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
             <label for="choice{{forloop.counter}}">
                 {{choice.choice_text}}
             </label>
         </li>
         {% endfor %}
-        <input type="submit" value="Vote">
     </ul>
+    <input type="submit" class="w-50 btn btn-primary" value="Vote">
 </form>
+</div>
+{% endblock %}

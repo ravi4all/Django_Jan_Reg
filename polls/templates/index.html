@@ -1,8 +1,13 @@
-<h1>Welcome to Poll App</h1>
+{% extends 'header.html' %}
+
+{% block content %}
+
+<h1 class="text-center">Welcome to Poll App</h1>
+<h2>Questions :</h2>
 {% if questions %}
-<ul>
+<ul class="list-group">
     {% for ques in questions %}
-    <li>
+    <li class="list-group-item list-group-item-secondary">
         <!--<a href="/polls/{{ques.id}}">-->
             <!--{{ques.question_text}}-->
         <!--</a>-->
@@ -16,3 +21,5 @@
 {% else %}
 <h3>No Questions found</h3>
 {% endif %}
+
+{% endblock %}

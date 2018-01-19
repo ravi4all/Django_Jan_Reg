@@ -1,0 +1,19 @@
+{% extends 'header.html' %}
+
+{% block content %}
+
+<h1>{{question.question_text}}</h1>
+
+<div id="result_list">
+    <ul class="list-group">
+        {% for choice in question.choice_set.all %}
+        <li class="list-group-item">
+            {{choice.choice_text}} -- {{choice.votes}} vote
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<a href="{% url 'polls:detail' question.id %}">Vote Again ?</a>
+
+{% endblock %}
