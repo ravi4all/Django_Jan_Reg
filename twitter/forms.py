@@ -1,9 +1,10 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
 
 class RegisterUser(UserCreationForm):
     email = forms.EmailField()
+    # message = forms.CharField(max_length=100)
 
     class Meta:
         model = User
@@ -25,3 +26,15 @@ class RegisterUser(UserCreationForm):
         if commit:
             user_1.save()
         return user_1
+
+class EditProfile(UserChangeForm):
+    template_name = 'includes/edit_profile.html'
+
+    class Meta:
+        model = User
+        fields = (
+            'first_name',
+            'last_name',
+            'email',
+            'password'
+        )

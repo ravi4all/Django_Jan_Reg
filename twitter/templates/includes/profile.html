@@ -3,9 +3,22 @@
 {% block content %}
 <div class="container">
     <h2>User Profile</h2>
-    <h4>Welcome {{user}}</h4>
-    <p>First Name : {{user.first_name}}</p>
-    <p>Last Name : {{user.last_name}}</p>
-    <p>Email ID : {{user.email}}</p>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Welcome {{user}}</h4>
+            {% if user.userprofile.profile_image %}
+            <img src="/twitter{{user.userprofile.profile_image.url}}" width="50%" alt="profile_pic">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <p>First Name : {{user.first_name}}</p>
+            <p>Last Name : {{user.last_name}}</p>
+            <p>Email ID : {{user.email}}</p>
+            <p>Description : {{user.userprofile.description}}</p>
+            <p>City : {{user.userprofile.city}}</p>
+            <p>Website : {{user.userprofile.website}}</p>
+            <p>Phone No : {{user.userprofile.phoneNo}}</p>
+        </div>
+    </div>
 </div>
 {% endblock %}
