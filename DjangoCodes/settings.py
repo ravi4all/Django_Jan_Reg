@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'twitter.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoCodes.urls'
@@ -137,3 +138,9 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_REDIRECT_URL = '/twitter/'
+
+LOGIN_URL = '/twitter/login/'
+
+LOGIN_EXEMPT_URLS = (
+    r'/twitter/logout/',
+)
