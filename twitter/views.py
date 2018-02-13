@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import RegisterUser, EditProfile
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(req):
@@ -22,8 +23,12 @@ def register(req):
         return render(req, 'includes/registration.html', context)
 
 @login_required
-def view_profile(req):
-    user = req.user
+def view_profile(req, pk=None):
+
+    if pk:
+        user = User.objects.get(pk=pk)
+    else:
+        user = req.user
 
     context = {"user" : user}
 
