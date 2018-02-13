@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Welcome {{current_user}}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-info">Post</button>
+        </form>
+
+        <div>
+            {% for post in posts %}
+            <article class="post">
+                <p>
+                    <b>{{post.post}}</b>
+                </p>
+                <p>
+                    Post By <i>{{post.user.get_full_name}}</i> on {{post.datetime}}
+                </p>
+            </article>
+            {% endfor %}
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <h2>Suggested Friends</h2>
+        <ul class="list-group">
+            {% for friend in friends %}
+            <li class="list-group-item">
+                <a href="{% url 'twitter:profile_with_pk' pk=friend.pk %}">
+                    {{friend}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
