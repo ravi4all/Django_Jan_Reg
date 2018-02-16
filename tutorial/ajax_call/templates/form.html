@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>AJAX Demo</h1>
+
+<header id="header">
+    <div class="form">
+        <form action="/ajax/login/" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Enter Name</td>
+                    <td><input type="text" name="username"
+                               placeholder="Enter Username" id="username"></td>
+                    <td>
+                        {% if errors %}
+                            <ul>
+                                {% for error in errors %}
+                                <li>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Enter Password</td>
+                    <td>
+                        <input type="password" placeholder="Enter Password" id="pass">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Sign In">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</header>
+
+{% load staticfiles %}
+<script src="{% static 'custom.js' %}"></script>
+{% block javascript %}
+{% endblock %}
+
+</body>
+</html>
