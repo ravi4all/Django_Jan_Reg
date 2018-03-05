@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Login Form with AJAX</h1>
+
+<form action="/login/" method="post">{% csrf_token %}
+    <table>
+        <tr>
+            <td>Enter Name</td>
+            <td>
+                <input type="text" autofocus id="u_name" placeholder="Enter Name" name="username">
+            </td>
+            <td>
+                <span id="error"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Password</td>
+            <td>
+                <input type="password" placeholder="Enter Password" name="pwd">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Login">
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% load staticfiles %}
+<!--<script src="{% static 'jquery-3.2.1.min.js' %}"></script>-->
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+{% block javascript %}
+<script>
+    $(document).ready(function(){
+        $("#u_name").blur(function(){
+        var username = $(this).val();
+            /*console.log($(this).val());*/
+            $.ajax({
+                url : '/loginValidate/',
+                data : {
+                    'username' : username
+                },
+                dataType : 'json',
+                success : function(data){
+                    /*console.log(data.err);*/
+                    $("#error").html(data);
+                }
+            })
+        })
+    })
+</script>
+{% endblock %}
+</body>
+</html>
